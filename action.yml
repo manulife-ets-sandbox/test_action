@@ -1,18 +1,21 @@
 name: 'Hello World'
-description: 'Greeting some one and record the time'
+description: 'Greet someone'
 inputs:
-  who-to-greet: 
-    description: 'who to greet'
+  who-to-greet:  # id of input
+    description: 'Who to greet'
     required: true
-    default: 'world'
+    default: 'World'
 outputs:
-  time:
-    description: 'the time we greeted you'
-    value: ${{ steps.timestamp }}
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
 runs:
-  using: 'bash'
+  using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}. 
-    - run: echo current directory is `pwd`
-    - id: timestamp
-      run: echo `date`
+    - run: echo Hello ${{ inputs.who-to-greet }}.
+      shell: bash
+    - id: random-number-generator
+      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+      shell: bash
+    - run: ${{ github.action_path }}/goodbye.sh
+      shell: bash
