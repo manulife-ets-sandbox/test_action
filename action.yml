@@ -1,0 +1,18 @@
+name: 'Hello World'
+description: 'Greeting some one and record the time'
+inputs:
+  who-to-greet: 
+    description: 'who to greet'
+    required: true
+    default: 'world'
+outputs:
+  time:
+    description: 'the time we greeted you'
+    value: ${{ steps.timestamp }}
+runs:
+  using: 'bash'
+  steps:
+    - run: echo Hello ${{ inputs.who-to-greet }}. 
+    - run: echo current directory is `pwd`
+    - id: timestamp
+      run: echo `date`
