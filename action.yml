@@ -12,10 +12,10 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - run: |
+        echo Hello ${{ inputs.who-to-greet }}.
+        /opt/chefdk/embedded/bin/ruby ${{ github.action_path }}/test_action.rb
       shell: bash
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
-    - run: ${{ github.action_path }}/test_action.rb
-      shell: /opt/chefdk/embedded/bin/ruby {0}
