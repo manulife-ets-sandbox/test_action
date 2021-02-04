@@ -18,4 +18,4 @@ runs:
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
     - run: ${{ github.action_path }}/test_action.rb
-      shell: /opt/chefdk/embedded/bin/ruby
+      shell: /opt/chefdk/embedded/bin/ruby {0}
